@@ -26,14 +26,16 @@ func _physics_process(delta):
 		$AnimatedSprite.play('Fly')
 		if flying == false:
 			velocity.y = -jump
-			rot = deg2rad(-20)
+			rot = deg2rad(-40)
 		flying = true
 	elif $AnimatedSprite.animation == 'Fly' and $AnimatedSprite.frame == 3:
 		$AnimatedSprite.play('Idle')
 		flying = false
-		
-	rotation = rot
-	rot += 1*delta
+	
+	if rot != deg2rad(-40):
+		rotation = rot
+	if rad2deg(rotation) != 90:
+		rot += 1*delta
 	
 	move_and_slide(velocity, Vector2(0,-1))
 		
