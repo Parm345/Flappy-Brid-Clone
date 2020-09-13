@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Main.gd" type="Script" id=1]
 [ext_resource path="res://flappy-bird-assets/sprites/background-night.png" type="Texture" id=2]
 [ext_resource path="res://flappy-bird-assets/sprites/background-day.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Bird.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -11,3 +12,6 @@ bgNight = ExtResource( 2 )
 
 [node name="Background" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 143.338, 100.109 )
