@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
 export var gravity = 400
-export var jump = 200
+export var jump = 300
+export var rotateSpeed = 1
 
 
 # Declare member variables here. Examples:
@@ -21,21 +22,20 @@ var rot = 0
 func _physics_process(delta):
 	velocity.y += delta*gravity
 	
-	
-	if Input.is_action_pressed("ui_select"):
+	if Input.is_action_just_pressed("ui_select"):
 		$AnimatedSprite.play('Fly')
-		if flying == false:
-			velocity.y = -jump
-			rot = deg2rad(-40)
-		flying = true
+		$Flap.play()
+		velocity.y = -jump
+		rot = deg2rad(-40)
 	elif $AnimatedSprite.animation == 'Fly' and $AnimatedSprite.frame == 3:
 		$AnimatedSprite.play('Idle')
 		flying = false
 	
 	if rot != deg2rad(-40):
-		rotation = rot
-	if rad2deg(rotation) != 90:
-		rot += 1*delta
+		rotation = clamp(rot, deg2rad(-40), deg2rad(90))
+	
+	rot += rotateSpeed*delta
+	
 	
 	move_and_slide(velocity, Vector2(0,-1))
 		
